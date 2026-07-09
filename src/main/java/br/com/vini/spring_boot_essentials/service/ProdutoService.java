@@ -4,6 +4,7 @@ import br.com.vini.spring_boot_essentials.database.model.ProdutoEntity;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -31,4 +32,12 @@ public class ProdutoService {
                     .quantidade(10)
                     .build()
     );
+
+    public List<ProdutoEntity> findAll() {
+        return new ArrayList<>(PRODUTOS);
+    }
+
+    public ProdutoEntity createProduto(ProdutoEntity produtoEntity) {
+        return produtoEntity;
+    }
 }
