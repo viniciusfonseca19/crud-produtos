@@ -1,6 +1,8 @@
 package br.com.vini.spring_boot_essentials.service;
 
 import br.com.vini.spring_boot_essentials.database.model.ProdutoEntity;
+import br.com.vini.spring_boot_essentials.dto.ProdutoDto;
+import br.com.vini.spring_boot_essentials.exception.NotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -10,34 +12,69 @@ import java.util.List;
 @Service
 public class ProdutoService {
 
-    private static final List<ProdutoEntity> PRODUTOS = List.of(
-            ProdutoEntity.builder()
-                    .id(1)
-                    .nome("notebook")
-                    .preco(new BigDecimal("5000"))
-                    .quantidade(10)
-                    .build(),
+    private static final List<ProdutoEntity> PRODUTOS = new ArrayList<>();
 
-            ProdutoEntity.builder()
-                    .id(2)
-                    .nome("iphone")
-                    .preco(new BigDecimal("7000"))
-                    .quantidade(10)
-                    .build(),
+    static {
+        PRODUTOS.add(ProdutoEntity.builder()
+                .id(1)
+                .nome("notebook")
+                .preco(new BigDecimal("5000"))
+                .quantidade(10)
+                .build());
 
-            ProdutoEntity.builder()
-                    .id(3)
-                    .nome("mouse")
-                    .preco(new BigDecimal("600"))
-                    .quantidade(10)
-                    .build()
-    );
+        PRODUTOS.add(ProdutoEntity.builder()
+                        .id(2)
+                        .nome("iphone")
+                        .preco(new BigDecimal("7000"))
+                        .quantidade(10)
+                        .build());
+
+        PRODUTOS.add(ProdutoEntity.builder()
+                        .id(3)
+                        .nome("mouse")
+                        .preco(new BigDecimal("600"))
+                        .quantidade(10)
+                        .build());
+    };
 
     public List<ProdutoEntity> findAll() {
         return new ArrayList<>(PRODUTOS);
     }
 
-    public ProdutoEntity createProduto(ProdutoEntity produtoEntity) {
-        return produtoEntity;
+    public ProdutoEntity createProduto(ProdutoDto produtoDto) {
+
+        Integer integer = PRODUTOS.stream()
+                .mapToInt(ProdutoEntity::getId)
+                .max()
+                .orElse(0) + 1;
+
+        ProdutoEntity novoProduto = ProdutoEntity.builder()
+                .nome(produtoDto.getNome())
+                .preco(produtoDto.getPreco())
+                .quantidade(produtoDto.getQuantidade())
+                .build();
+
+        PRODUTOS.add(novoProduto);
+
+        return novoProduto;
     }
+
+    public ProdutoEntity atualizarProduto(ProdutoDto produtoDto, Integer id) throws NotFoundException {
+
+        ProdutoEntity produto = PRODUTOS.stream()
+                .filter(p -> p.getId().equals(id))
+                .findAny()
+                .orElseThrow(() -> new NotFoundException("Produto não encontrado"));
+
+        produto.setNome(produtoDto.getNome());
+        produto.setPreco(produtoDto.getPreco());
+        produto.setQuantidade(produtoDto.getQuantidade());
+
+        return produto;
+    }
+
+    public void removerProduto(Integer id){
+        PRODUTOS.removeIf(p -> p.getId().equals(id));
+    }
+
 }
