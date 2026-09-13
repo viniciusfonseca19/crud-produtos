@@ -1,272 +1,206 @@
-#  CRUD Produtos
+#  Projeto Final — POO
 
-API REST desenvolvida com **Java e Spring Boot** para gerenciamento de produtos através das operações fundamentais de um CRUD: **Create, Read, Update e Delete**.
+Aplicação desktop desenvolvida com **Java** como projeto final da disciplina de **Programação Orientada a Objetos (POO)**.
 
-O projeto foi desenvolvido com foco no aprendizado de desenvolvimento backend, organização em camadas, construção de APIs REST, utilização de DTOs e tratamento de exceções.
-
----
-# Documentação
-
-<table>
-  <tr>
-    <td>
-      <img src="https://github.com/user-attachments/assets/2dc63e2b-a779-48a9-ac48-d8550f07e1dc" width="100%">
-    </td>
-    <td>
-      <img src="https://github.com/user-attachments/assets/79027c49-e525-4df0-b035-08611b7acbbc" width="100%">
-    </td>
-  </tr>
-</table>
+O projeto foi desenvolvido com foco na aplicação prática dos principais conceitos de orientação a objetos, organização do código utilizando o padrão **MVC (Model-View-Controller)** e construção de uma interface gráfica utilizando **Java Swing**.
 
 ---
 
 ##  Sobre o projeto
 
-O **CRUD Produtos** permite realizar o gerenciamento de produtos por meio de uma API REST.
+O **Projeto Final — POO** é uma aplicação desktop desenvolvida em **Java**, criada com o objetivo de aplicar na prática os conceitos estudados durante a disciplina de **Programação Orientada a Objetos**.
 
-Cada produto possui:
+A aplicação possui uma interface gráfica desenvolvida com **Java Swing** e utiliza uma organização baseada no padrão arquitetural **MVC**, buscando separar as responsabilidades entre as diferentes partes do sistema.
 
-* **ID**
-* **Nome**
-* **Preço**
-* **Quantidade**
+O projeto trabalha conceitos fundamentais como:
 
-A aplicação disponibiliza endpoints para:
-
-* 📋 Listar produtos
-* ➕ Cadastrar produtos
-* ✏️ Atualizar produtos
-* 🗑️ Remover produtos
-
-Atualmente, os dados são armazenados **em memória**, utilizando uma lista durante a execução da aplicação.
+* Classes e objetos
+* Encapsulamento
+* Abstração
+* Herança
+* Polimorfismo
+* Construtores
+* Métodos e atributos
+* Modificadores de acesso
+* Separação de responsabilidades
+* Arquitetura MVC
+* Interfaces gráficas com Java Swing
 
 ---
 
 ##  Tecnologias utilizadas
 
-*  **Java**
-*  **Spring Boot**
-*  **Maven**
-*  **Lombok**
-*  **SpringDoc OpenAPI**
-*  **REST API**
-*  **JSON**
+* **Java**
+* **Java Swing**
+* **AWT**
+* **MVC**
+* **Git**
+* **GitHub**
 
 ---
 
 ##  Arquitetura
 
-O projeto utiliza uma organização baseada em responsabilidades, separando as principais partes da aplicação:
+O projeto utiliza o padrão arquitetural **MVC (Model-View-Controller)** para organizar os componentes da aplicação e separar suas responsabilidades.
 
 ```text
 src/
 └── main/
-    ├── java/
-    │   └── br/com/vini/spring_boot_essentials/
-    │       ├── controller/
-    │       ├── database/
-    │       │   └── model/
-    │       ├── dto/
-    │       ├── exception/
-    │       ├── handler/
-    │       ├── service/
-    │       └── SpringBootEssentialsApplication.java
-    │
-    └── resources/
-        └── application.yaml
+    └── java/
+        └── ...
+            ├── controller/
+            ├── model/
+            └── view/
 ```
 
 ### Responsabilidade das camadas
 
-**Controller**
-
-Responsável por receber as requisições HTTP e disponibilizar os endpoints da API.
-
-**Service**
-
-Responsável pela lógica de negócio e pelas operações realizadas sobre os produtos.
-
-**DTO**
-
-Utilizado para transportar os dados recebidos nas requisições de criação e atualização.
-
 **Model**
 
-Representa a estrutura dos produtos utilizados pela aplicação.
+Responsável por representar os dados e as entidades utilizadas pela aplicação, além de concentrar os elementos relacionados ao domínio do sistema.
 
-**Exception**
+**View**
 
-Contém as exceções personalizadas utilizadas pelo sistema.
+Responsável pela interface gráfica da aplicação, utilizando componentes do **Java Swing** para apresentar informações e permitir a interação do usuário.
 
-**Handler**
+**Controller**
 
-Responsável pelo tratamento global das exceções e pela padronização das respostas de erro.
+Responsável por controlar o fluxo da aplicação e realizar a comunicação entre as interfaces (**View**) e os dados/regras do sistema (**Model**).
 
 ---
 
-##  Endpoints
+##  Interface
 
-A API utiliza o prefixo:
+<table>
+  <tr>
+    <td>
+      <img width="100%" alt="Captura de tela 2026-09-12 210158" src="https://github.com/user-attachments/assets/52668986-4bf5-4355-804a-fe4158756f6d" />
+    </td>
+    <td>
+      <img width="100%" alt="Captura de tela 2026-09-12 210212" src="https://github.com/user-attachments/assets/6c6e4a64-6d44-4feb-b323-9b6fe05f50f7" />
+    </td>
+  </tr>
+</table>
+
+
+---
+
+##  Programação Orientada a Objetos
+
+Um dos principais objetivos do projeto é demonstrar a utilização prática dos conceitos fundamentais da **Programação Orientada a Objetos**.
+
+### Encapsulamento
+
+Utilização de modificadores de acesso e métodos para controlar o acesso aos atributos das classes.
+
+### Abstração
+
+Representação das características e comportamentos essenciais dos objetos, mantendo a implementação organizada.
+
+### Herança
+
+Utilização do relacionamento entre classes para possibilitar o reaproveitamento de características e comportamentos.
+
+### Polimorfismo
+
+Permite que diferentes objetos possam responder de maneiras diferentes às mesmas operações, de acordo com suas implementações.
+
+---
+
+##  Fluxo da aplicação
+
+De forma geral, o fluxo da aplicação segue a seguinte estrutura:
 
 ```text
-/v1/produtos
+Usuário
+   ↓
+View
+   ↓
+Controller
+   ↓
+Model
+   ↓
+Controller
+   ↓
+View
 ```
 
-### Listar produtos
-
-```http
-GET /v1/produtos
-```
-
-Retorna todos os produtos cadastrados.
-
-**Status:** `200 OK`
+A **View** recebe a interação do usuário, o **Controller** processa a ação e realiza a comunicação necessária com o **Model**, retornando posteriormente as informações para a interface.
 
 ---
 
-### Cadastrar produto
-
-```http
-POST /v1/produtos
-```
-
-Exemplo de requisição:
-
-```json
-{
-  "nome": "Teclado Mecânico",
-  "preco": 299.90,
-  "quantidade": 10
-}
-```
-
-**Status:** `201 Created`
-
----
-
-### Atualizar produto
-
-```http
-PUT /v1/produtos/{id}
-```
-
-Exemplo:
-
-```http
-PUT /v1/produtos/1
-```
-
-Body:
-
-```json
-{
-  "nome": "Teclado Mecânico RGB",
-  "preco": 349.90,
-  "quantidade": 15
-}
-```
-
-**Status:** `200 OK`
-
----
-
-### Remover produto
-
-```http
-DELETE /v1/produtos/{id}
-```
-
-Exemplo:
-
-```http
-DELETE /v1/produtos/1
-```
-
-**Status:** `204 No Content`
-
----
-
-## Tratamento de exceções
-
-O projeto possui um **Global Exception Handler** utilizando `@RestControllerAdvice`.
-
-Entre os tratamentos implementados está o erro de produto não encontrado, retornando:
-
-```json
-{
-  "message": "Produto não encontrado",
-  "status": 404
-}
-```
-
-Também existe um tratamento geral para exceções inesperadas, retornando `500 Internal Server Error`.
-
----
-
-## Como executar
+##  Como executar
 
 ### Pré-requisitos
 
 Antes de executar o projeto, tenha instalado:
 
-* Java JDK
-* Maven
-* IntelliJ IDEA ou outra IDE compatível
+* **Java JDK**
+* **IntelliJ IDEA**, Eclipse, VS Code ou outra IDE compatível
 
 ### 1. Clone o repositório
 
 ```bash
-git clone https://github.com/viniciusfonseca19/crud-produtos.git
+git clone https://github.com/viniciusfonseca19/projeto-final-poo.git
 ```
 
 ### 2. Entre na pasta
 
 ```bash
-cd crud-produtos
+cd projeto-final-poo
 ```
 
-### 3. Execute o projeto
+### 3. Abra o projeto
 
-Com Maven:
+Abra a pasta do projeto na IDE de sua preferência.
 
-```bash
-mvn spring-boot:run
+### 4. Execute a aplicação
+
+Localize a classe principal que contém o método:
+
+```java
+public static void main(String[] args)
 ```
 
-Ou execute a classe:
-
-```text
-SpringBootEssentialsApplication.java
-```
-
-A aplicação será iniciada na porta padrão:
-
-```text
-http://localhost:8080
-```
+e execute a aplicação.
 
 ---
 
+## Objetivo
 
-##  Objetivo
+Este projeto foi desenvolvido como projeto final da disciplina de **Programação Orientada a Objetos** do meu curso Técnico de Informática, tendo como principal objetivo colocar em prática os conhecimentos adquiridos durante os estudos de Java.
 
-Este projeto foi desenvolvido como parte dos estudos de **Java e Spring Boot**, com o objetivo de praticar conceitos fundamentais de desenvolvimento backend, incluindo:
+O desenvolvimento também proporcionou experiência com:
 
-* APIs REST
-* Spring Boot
+* Programação Orientada a Objetos
+* Desenvolvimento desktop
+* Java Swing
+* Arquitetura MVC
+* Organização de código
 * Separação de responsabilidades
-* Controllers
-* Services
-* DTOs
-* Tratamento de exceções
-* HTTP Status Codes
-* JSON
-* Maven
-* Lombok
+* Desenvolvimento de interfaces gráficas
+* Git e GitHub
 
 ---
 
-## 👨‍💻 Autor
+##  Aprendizados
+
+Durante o desenvolvimento do projeto foram praticados conceitos importantes para a formação em desenvolvimento Java, incluindo:
+
+* Criação e organização de classes
+* Relacionamento entre objetos
+* Encapsulamento
+* Herança
+* Polimorfismo
+* Abstração
+* Arquitetura MVC
+* Desenvolvimento de interfaces gráficas
+* Manipulação de eventos no Java Swing
+* Organização de projetos Java
+
+---
+
+##  Autor
 
 Desenvolvido por **Vinícius Fonseca**.
 
@@ -274,4 +208,4 @@ Estudante de Técnico em Informática e desenvolvedor focado em **Java, Spring B
 
 ---
 
-⭐ Se este projeto foi útil para você, considere deixar uma estrela no repositório!
+⭐ Se este projeto foi útil para você ou ajudou nos seus estudos, considere deixar uma estrela no repositório!
